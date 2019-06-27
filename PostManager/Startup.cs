@@ -5,6 +5,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PostManager.DAL.Contexts;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
+using System;
+using PostManager.BL.Services;
+using PostManager.BL.Startup;
 
 namespace PostManager
 {
@@ -21,8 +25,10 @@ namespace PostManager
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.AddDbContext<FeedContext>(
-                options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddBLServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

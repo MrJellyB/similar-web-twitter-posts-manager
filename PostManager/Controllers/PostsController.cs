@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PostManager.Models;
+using PostManager.BL;
+using PostManager.BL.Services;
+using PostManager.Common.Models;
 
 namespace PostManager.Controllers
 {
@@ -11,6 +11,14 @@ namespace PostManager.Controllers
     [ApiController]
     public class PostsController : ControllerBase
     {
+        private readonly IPostsService _postsService;
+
+        public PostsController(IPostsService postsService)
+        {
+            _postsService = postsService;
+        }
+
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
@@ -35,6 +43,8 @@ namespace PostManager.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody]SendPostRequest postToSend)
         {
+            await _postsService.Send(postToSend);
+
             return Ok();
         }
 

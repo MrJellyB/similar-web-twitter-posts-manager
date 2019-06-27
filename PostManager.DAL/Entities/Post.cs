@@ -2,7 +2,7 @@
 using PostManager.DAL.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace PostManager.DAL.Enteties
+namespace PostManager.DAL.Entities
 {
     public class Post
     {
@@ -17,7 +17,7 @@ namespace PostManager.DAL.Enteties
 
         public string Body { get; set; }
 
-        public int FeedId { get; set; }
-        public Feed Feed { get; set; }
+        //public int FeedId { get; set; }
+        //public Feed Feed { get; set; }
     }
 }

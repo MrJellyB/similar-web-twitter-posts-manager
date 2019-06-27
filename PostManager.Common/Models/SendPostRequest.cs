@@ -1,12 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace PostManager.Models
+namespace PostManager.Common.Models
 {
-    public class Post
+    public class SendPostRequest
     {
-        [Required]
         public string Title { get; set; }
 
+        public string UserID { get; set; }
+
         public string Body { get; set; }
+
     }
 }

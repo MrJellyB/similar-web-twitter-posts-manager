@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostManager", "PostManager.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostManager.DAL", "..\PostManager.DAL\PostManager.DAL.csproj", "{20205382-2B31-47D9-B24C-7C4ADED1E5CB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostManager.BL", "..\PostManager.BL\PostManager.BL.csproj", "{0C28C76A-6D8C-4553-8C88-638BD56F1AB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostManager.Common", "..\PostManager.Common\PostManager.Common.csproj", "{1F2EEE22-3193-4454-B7C6-390E4B691649}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{20205382-2B31-47D9-B24C-7C4ADED1E5CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20205382-2B31-47D9-B24C-7C4ADED1E5CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20205382-2B31-47D9-B24C-7C4ADED1E5CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C28C76A-6D8C-4553-8C88-638BD56F1AB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C28C76A-6D8C-4553-8C88-638BD56F1AB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C28C76A-6D8C-4553-8C88-638BD56F1AB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C28C76A-6D8C-4553-8C88-638BD56F1AB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F2EEE22-3193-4454-B7C6-390E4B691649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F2EEE22-3193-4454-B7C6-390E4B691649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F2EEE22-3193-4454-B7C6-390E4B691649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F2EEE22-3193-4454-B7C6-390E4B691649}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
