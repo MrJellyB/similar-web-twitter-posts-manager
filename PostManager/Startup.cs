@@ -9,6 +9,7 @@ using AutoMapper;
 using System;
 using PostManager.BL.Services;
 using PostManager.BL.Startup;
+using PostManager.Middlewares;
 
 namespace PostManager
 {
@@ -24,8 +25,14 @@ namespace PostManager
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+            services.AddHttpClient();
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = TokenValidationHandler.SchemeName;
+            }).AddScheme<CustomAuthOptions, TokenValidationHandler>(TokenValidationHandler.SchemeName, "My Scheme", (options) => { });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddBLServices(Configuration);
