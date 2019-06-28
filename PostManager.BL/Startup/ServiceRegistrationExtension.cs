@@ -1,9 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PostManager.BL.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PostManager.BL.Startup
 {
@@ -14,6 +11,7 @@ namespace PostManager.BL.Startup
             services.AddDALServices(configuration);
 
             services.AddScoped<IPostsService, PostsService>();
+            services.AddScoped<IFeedsService, FeedsService>();
         }
     }
 }

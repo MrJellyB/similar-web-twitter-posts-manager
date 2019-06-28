@@ -20,6 +20,7 @@ namespace PostManager.BL.Startup
             services.AddDbContext<FeedContext>(options => options.UseNpgsql(connectionString));
 
             services.AddScoped<IPostsRepository, PostsRepository>();
+            services.AddScoped<IFeedsRepository, FeedsRepository>();
 
         }
     }

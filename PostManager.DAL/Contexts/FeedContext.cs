@@ -13,8 +13,25 @@ namespace PostManager.DAL.Contexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Post>()
+                .HasKey(x => x.PostId);
+
             builder.Entity<Feed>()
-                .HasIndex(f => f.UserID)
+                .HasKey(x => x.FeedId);
+
+            builder.Entity<FeedPost>()
+                .HasKey(x => new { x.FeedId, x.PostId});
+            builder.Entity<FeedPost>()
+                .HasOne(x => x.Post)
+                .WithMany(m => m.Feeds)
+                .HasForeignKey(x => x.PostId);
+            builder.Entity<FeedPost>()
+                .HasOne(x => x.Feed)
+                .WithMany(m => m.Posts)
+                .HasForeignKey(x => x.FeedId);
+
+            builder.Entity<Feed>()
+                .HasIndex(f => f.RelatedToUser)
                 .IsUnique();
         }
     }

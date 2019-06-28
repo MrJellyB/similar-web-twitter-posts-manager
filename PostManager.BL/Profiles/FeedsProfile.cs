@@ -11,7 +11,9 @@ namespace PostManager.BL.Profiles
     {
         public FeedsProfile()
         {
-            CreateMap<CreateFeedRequest, Feed>();
+            CreateMap<CreateFeedRequest, Feed>()
+                .ForMember(dest => dest.RelatedToUser, 
+                           opt => opt.MapFrom(src => src.UserId));
         }
     }
 }

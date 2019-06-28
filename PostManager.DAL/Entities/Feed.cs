@@ -8,11 +8,11 @@ namespace PostManager.DAL.Entities
 {
     public class Feed
     {
-        public Guid FeedId { get; set; }
+        public int FeedId { get; set; }
 
         [Required]
-        public string UserID { get; set; }
+        public string RelatedToUser { get; set; }
 
-        public ICollection<Post> Posts { get; set; }
+        public ICollection<FeedPost> Posts { get; set; }
     }
 }

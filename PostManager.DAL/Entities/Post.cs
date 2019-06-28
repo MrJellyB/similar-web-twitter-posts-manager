@@ -15,6 +15,6 @@ namespace PostManager.DAL.Entities
 
         public string Body { get; set; }
 
-        public ICollection<Feed> Feeds { get; set; }
+        public ICollection<FeedPost> Feeds { get; set; }
     }
 }
