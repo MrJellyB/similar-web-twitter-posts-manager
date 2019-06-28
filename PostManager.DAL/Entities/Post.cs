@@ -1,5 +1,6 @@
 ﻿
 using PostManager.DAL.Entities;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace PostManager.DAL.Entities
@@ -12,12 +13,8 @@ namespace PostManager.DAL.Entities
         [Required]
         public string Title { get; set; }
 
-        [Required]
-        public string UserID { get; set; }
-
         public string Body { get; set; }
 
-        //public int FeedId { get; set; }
-        //public Feed Feed { get; set; }
+        public ICollection<Feed> Feeds { get; set; }
     }
 }

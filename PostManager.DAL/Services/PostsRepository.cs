@@ -14,13 +14,10 @@ namespace PostManager.DAL.Services
         Task<bool> SaveChangesAsync();
     }
 
-    public class PostsRepository : IPostsRepository
+    public class PostsRepository : BaseFeedRepository, IPostsRepository
     {
-        private FeedContext _context;
-
-        public PostsRepository(FeedContext context)
+        public PostsRepository(FeedContext context) : base(context)
         {
-            _context = context;
         }
 
         public void CreatePost(Post postToSave)
@@ -30,24 +27,7 @@ namespace PostManager.DAL.Services
                 throw new ArgumentNullException(nameof(postToSave));
             }
 
-            try
-            {
-                _context.Add(new Feed() { FeedId = 1, Posts = new List<Post>() });
-                _context.SaveChanges();
-                //postToSave.FeedId = 1;
-                //postToSave.Feed = new Feed();
-                _context.Add(postToSave);
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public async Task<bool> SaveChangesAsync()
-        {
-            return await _context.SaveChangesAsync() > 0;
+            _context.Add(postToSave);
         }
     }
 }

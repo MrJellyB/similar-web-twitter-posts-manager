@@ -10,5 +10,12 @@ namespace PostManager.DAL.Contexts
 
         public DbSet<Feed> Feeds { get; set; }
         public DbSet<Post> Posts { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Feed>()
+                .HasIndex(f => f.UserID)
+                .IsUnique();
+        }
     }
 }

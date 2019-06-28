@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using PostManager.Common.Models;
 using PostManager.DAL.Entities;
-using PostManager.DAL.Factories;
 using PostManager.DAL.Services;
 using System.Threading.Tasks;
 
@@ -14,8 +13,8 @@ namespace PostManager.BL.Services
 
     public class PostsService : IPostsService
     {
-        private IMapper _mapper;
-        private IPostsRepository _postsRepository;
+        private readonly IMapper _mapper;
+        private readonly IPostsRepository _postsRepository;
 
         public PostsService(IMapper mapper, IPostsRepository postsRepository)
         {

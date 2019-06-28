@@ -1,9 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PostManager.DAL.Contexts;
-using PostManager.DAL.Factories;
 using PostManager.DAL.Services;
 
 namespace PostManager.BL.Startup
