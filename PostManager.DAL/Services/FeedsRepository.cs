@@ -16,6 +16,8 @@ namespace PostManager.DAL.Services
 
         Task<Feed> GetOneAsync(Expression<Func<Feed, bool>> condition);
 
+        void AddToFeed(ref Post post, ref Feed feed);
+
         Task<bool> SaveChangesAsync();
     }
 
@@ -33,7 +35,25 @@ namespace PostManager.DAL.Services
 
         public async Task<Feed> GetOneAsync(Expression<Func<Feed, bool>> condition)
         {
-            return await _context.Feeds.FirstOrDefaultAsync(predicate: condition);
+            var result = _context.Feeds
+                .Include(f => f.Posts)
+                .ThenInclude(p => p.Post);
+
+            return await result.FirstOrDefaultAsync(condition);
+        }
+
+        public void AddToFeed(ref Post post, ref Feed feed)
+        {
+            if (post == null)
+                throw new ArgumentException(nameof(post));
+
+            if (feed.Posts == null)
+                feed.Posts = new List<FeedPost>();
+            feed.Posts.Add(new FeedPost()
+            {
+                Post = post,
+                Feed = feed
+            });
         }
 
         public void Create(Feed feedToAdd)

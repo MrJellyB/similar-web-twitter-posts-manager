@@ -4,6 +4,7 @@ using PostManager.DAL.Entities;
 using PostManager.DAL.Services;
 using PostManager.BL.Extensions;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace PostManager.BL.Services
 {
@@ -31,8 +32,8 @@ namespace PostManager.BL.Services
 
             var postOwnerFeed = 
                 await _feedsRepository.GetOneAsync((feed) => feed.RelatedToUser == request.UserID);
-            postEntity.AddToFeed(postOwnerFeed);
-            
+            _feedsRepository.AddToFeed(ref postEntity ,ref postOwnerFeed);
+
             _postsRepository.CreatePost(postEntity);
             await _postsRepository.SaveChangesAsync();
         }

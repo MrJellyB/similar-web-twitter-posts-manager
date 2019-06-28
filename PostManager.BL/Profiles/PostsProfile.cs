@@ -9,6 +9,7 @@ namespace PostManager.BL.Profiles
         public PostsProfile()
         {
             CreateMap<SendPostRequest, Post>();
+            CreateMap<Post, PostResponse>();
         }
     }
 }

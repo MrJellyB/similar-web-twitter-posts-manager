@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using PostManager.Common.Models;
 using PostManager.DAL.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace PostManager.BL.Profiles
 {
@@ -14,6 +13,12 @@ namespace PostManager.BL.Profiles
             CreateMap<CreateFeedRequest, Feed>()
                 .ForMember(dest => dest.RelatedToUser, 
                            opt => opt.MapFrom(src => src.RelatedToUser));
+
+            CreateMap<Feed, FeedResponse>()
+                .ForMember(dest => dest.Posts,
+                           opt => opt.MapFrom(feed => 
+                                    feed.Posts.Select(postsFeed => postsFeed.Post)
+                               )) ;
         }
     }
 }

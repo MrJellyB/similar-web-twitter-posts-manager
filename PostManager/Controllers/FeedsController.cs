@@ -20,6 +20,13 @@ namespace PostManager.Controllers
             _feedsService = feedsService;
         }
 
+        [HttpGet]
+        [Route("global")]
+        public async Task<FeedResponse> GetGlobalFeed(string userId)
+        {
+            return await _feedsService.GetFeed(userId);
+        }
+
         public async Task<IActionResult> Create([FromBody]CreateFeedRequest request)
         {
             try

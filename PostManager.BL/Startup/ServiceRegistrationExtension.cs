@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using PostManager.BL.OnMemoryStore;
 using PostManager.BL.Services;
 
 namespace PostManager.BL.Startup
@@ -13,7 +12,6 @@ namespace PostManager.BL.Startup
 
             services.AddScoped<IPostsService, PostsService>();
             services.AddScoped<IFeedsService, FeedsService>();
-            services.AddSingleton<IUsers, Users>();
         }
     }
 }

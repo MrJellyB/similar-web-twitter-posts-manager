@@ -12,6 +12,7 @@ namespace PostManager.BL.Services
     public interface IFeedsService
     {
         Task CreateFeed(CreateFeedRequest request);
+        Task<FeedResponse> GetFeed(string userId);
     }
 
     public class FeedsService : IFeedsService
@@ -23,6 +24,13 @@ namespace PostManager.BL.Services
         {
             _mapper = mapper;
             _repository = repository;
+        }
+
+        public async Task<FeedResponse> GetFeed(string userId)
+        {
+            var feedFromDb = await _repository.GetOneAsync((feed) => feed.RelatedToUser == userId);
+
+            return _mapper.Map<FeedResponse>(feedFromDb);
         }
 
         public async Task CreateFeed(CreateFeedRequest request)
