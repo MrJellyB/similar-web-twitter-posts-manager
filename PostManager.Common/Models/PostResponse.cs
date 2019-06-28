@@ -8,7 +8,7 @@ namespace PostManager.Common.Models
     {
         public string Title { get; set; }
 
-        public string UserId { get; set; }
+        public virtual string User { get; set; }
 
         public string Body { get; set; }
     }

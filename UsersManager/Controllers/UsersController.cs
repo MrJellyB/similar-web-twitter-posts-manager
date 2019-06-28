@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PostManager.Common.Models;
+using UsersManager.Logic;
+using UsersManager.Models;
 
 namespace UsersManager.Controllers
 {
@@ -11,10 +13,23 @@ namespace UsersManager.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        [HttpGet]
-        public async Task<FeedResponse> GetFeed([FromBody]string userId)
+        private readonly IFeedUserEnricher _feedUserEnricher;
+        private readonly IFeedRepository _feedRepository;
+
+        public UsersController(IFeedUserEnricher feedUserEnricher, IFeedRepository feedRepository)
         {
-            return new FeedResponse();
+            _feedUserEnricher = feedUserEnricher;
+            _feedRepository = feedRepository;
+        }
+
+        [HttpGet]
+        [Route("feed")]
+        public async Task<EnrichedFeed> GetFeed(string userId)
+        {
+            var feed = await _feedRepository.Fetch(userId);
+            var enriched = _feedUserEnricher.Enrich(feed);
+
+            return enriched;
         }
     }
 }

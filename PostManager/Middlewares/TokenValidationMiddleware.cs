@@ -23,13 +23,11 @@ namespace PostManager.Middlewares
     {
         public const string SchemeName = "TokenValidationScheme";
         private readonly IHttpClientFactory _httpclientFactory;
-        private readonly IConfiguration _config;
 
-        public TokenValidationHandler(IOptionsMonitor<CustomAuthOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, IHttpClientFactory httpclientFactory, IConfiguration config)
+        public TokenValidationHandler(IOptionsMonitor<CustomAuthOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, IHttpClientFactory httpclientFactory)
             : base(options, logger, encoder, clock)
         {
             _httpclientFactory = httpclientFactory;
-            _config = config;
         }
 
 
