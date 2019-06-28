@@ -13,7 +13,7 @@ namespace PostManager.BL.Profiles
         {
             CreateMap<CreateFeedRequest, Feed>()
                 .ForMember(dest => dest.RelatedToUser, 
-                           opt => opt.MapFrom(src => src.UserId));
+                           opt => opt.MapFrom(src => src.RelatedToUser));
         }
     }
 }

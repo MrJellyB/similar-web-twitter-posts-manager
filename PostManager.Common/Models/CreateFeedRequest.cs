@@ -6,7 +6,7 @@ namespace PostManager.Common.Models
 {
     public class CreateFeedRequest
     {
-        public string UserId { get; set; }
+        public string RelatedToUser { get; set; }
 
     }
 }

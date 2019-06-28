@@ -32,7 +32,7 @@ namespace PostManager
                 options.DefaultAuthenticateScheme = TokenValidationHandler.SchemeName;
             }).AddScheme<CustomAuthOptions, TokenValidationHandler>(TokenValidationHandler.SchemeName, "My Scheme", (options) => { });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddBLServices(Configuration);
@@ -56,7 +56,7 @@ namespace PostManager
                 serviceScope.ServiceProvider.GetService<FeedContext>().Database.Migrate();
             }
 
-            app.UseHttpsRedirection();
+            app.UseCors(options => options.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseMvc();
         }
     }

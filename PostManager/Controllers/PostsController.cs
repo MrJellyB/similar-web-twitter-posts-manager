@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PostManager.BL;
 using PostManager.BL.Services;
 using PostManager.Common.Models;
 using PostManager.Middlewares;

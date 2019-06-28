@@ -4,6 +4,7 @@ using PostManager.Common.Exceptions;
 using PostManager.Common.Models;
 using PostManager.DAL.Entities;
 using PostManager.DAL.Services;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PostManager.BL.Services
@@ -27,6 +28,7 @@ namespace PostManager.BL.Services
         public async Task CreateFeed(CreateFeedRequest request)
         {
             var feedToSave = _mapper.Map<Feed>(request);
+            feedToSave.Posts = new List<FeedPost>();
 
             _repository.CreateFeed(feedToSave);
 
