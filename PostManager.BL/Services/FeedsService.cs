@@ -28,9 +28,8 @@ namespace PostManager.BL.Services
         public async Task CreateFeed(CreateFeedRequest request)
         {
             var feedToSave = _mapper.Map<Feed>(request);
-            feedToSave.Posts = new List<FeedPost>();
 
-            _repository.CreateFeed(feedToSave);
+            _repository.Create(feedToSave);
 
             try
             {
