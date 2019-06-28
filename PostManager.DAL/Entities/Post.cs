@@ -16,5 +16,7 @@ namespace PostManager.DAL.Entities
         public string Body { get; set; }
 
         public ICollection<FeedPost> Feeds { get; set; }
+
+        public int LikesCount { get; set; }
     }
 }

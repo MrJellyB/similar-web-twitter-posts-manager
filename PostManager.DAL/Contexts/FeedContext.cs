@@ -13,6 +13,8 @@ namespace PostManager.DAL.Contexts
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+
+            // Many to many key bindings
             builder.Entity<Post>()
                 .HasKey(x => x.PostId);
 
@@ -33,6 +35,9 @@ namespace PostManager.DAL.Contexts
             builder.Entity<Feed>()
                 .HasIndex(f => f.RelatedToUser)
                 .IsUnique();
+
+            // Default values
+            builder.Entity<Post>().Property(p => p.LikesCount).HasDefaultValue(0);
         }
     }
 }
