@@ -24,7 +24,7 @@ namespace UsersManager.Controllers
 
         [HttpGet]
         [Route("feed")]
-        public async Task<EnrichedFeed> GetFeed(string userId)
+        public async Task<EnrichedFeed> GetFeed([FromQuery]string userId)
         {
             var feed = await _feedRepository.Fetch(userId);
             var enriched = _feedUserEnricher.Enrich(feed);
