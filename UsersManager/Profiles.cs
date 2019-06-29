@@ -16,6 +16,8 @@ namespace UsersManager
             CreateMap<FeedResponse, EnrichedFeed>()
                 .ForMember(dest => dest.Posts,
                            opt => opt.MapFrom<UsersRepository>());
+
+            CreateMap<PostResponse, EnrichedPost>();
         }
     }
 }

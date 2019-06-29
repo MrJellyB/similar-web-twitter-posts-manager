@@ -9,7 +9,9 @@ namespace PostManager.BL.Profiles
         public PostsProfile()
         {
             CreateMap<SendPostRequest, Post>();
-            CreateMap<Post, PostResponse>();
+            CreateMap<Post, PostResponse>()
+                .ForMember(dest => dest.User,
+                           opt => opt.MapFrom(post => post.OwnerId));
         }
     }
 }

@@ -8,6 +8,7 @@ namespace UsersManager.Models
 {
     public class EnrichedPost
     {
-        public User User { get; set; }
+        public PostResponse OriginalPost { get; set; }
+        public User Owner { get; set; }
     }
 }

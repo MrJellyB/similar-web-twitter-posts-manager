@@ -28,11 +28,14 @@ namespace UsersManager.Logic
 
         public async Task<User> Fetch(string userId)
         {
+            if (userId == null)
+                return null;
+
             using (var httpClient = _httpClientFactory.CreateClient("withToken"))
             {
                 var authServiceUrl = Environment.GetEnvironmentVariable("MICROSERVICES_AUTH");
                 var userResponse = await
-                    (await httpClient.GetAsync(authServiceUrl)).Content.ReadAsStringAsync();
+                    (await httpClient.GetAsync($"{authServiceUrl}/info/user?userId={userId}")).Content.ReadAsStringAsync();
 
                 var user = JsonConvert.DeserializeObject<User>(userResponse);
 
@@ -57,11 +60,15 @@ namespace UsersManager.Logic
 
         public EnrichedPost[] Resolve(FeedResponse source, EnrichedFeed destination, EnrichedPost[] destMember, ResolutionContext context)
         {
-            return 
+           var results =  
                 source.Posts
-                .Select(async post => new EnrichedPost() { User=await Fetch(post.User) })
+                .Select(async post => new EnrichedPost() {
+                    OriginalPost = post,
+                    Owner = await Fetch(post.User) })
                 .Select(t => t.Result)
                 .ToArray();
+
+            return results;
         }
     }
 }
