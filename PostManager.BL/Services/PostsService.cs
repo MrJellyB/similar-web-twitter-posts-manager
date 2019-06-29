@@ -31,7 +31,7 @@ namespace PostManager.BL.Services
             Post postEntity = _mapper.Map<Post>(request);
 
             var postOwnerFeed = 
-                await _feedsRepository.GetOneAsync((feed) => feed.RelatedToUser == request.UserID);
+                await _feedsRepository.GetOneAsync((feed) => feed.RelatedToUser == request.OwnerId);
             _feedsRepository.AddToFeed(ref postEntity ,ref postOwnerFeed);
 
             _postsRepository.CreatePost(postEntity);
