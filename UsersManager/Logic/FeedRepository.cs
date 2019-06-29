@@ -23,7 +23,7 @@ namespace UsersManager.Logic
 
         public async Task<FeedResponse> Fetch(string userId)
         {
-            using (var httpClient = _httpClientFactory.CreateClient())
+            using (var httpClient = _httpClientFactory.CreateClient("withToken"))
             {
                 var postsServiceUrl = Environment.GetEnvironmentVariable("MICROSERVICES_POSTS");
                 var feedResponse = await

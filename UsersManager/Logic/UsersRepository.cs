@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using AutoMapper;
+using Newtonsoft.Json;
+using PostManager.Common.Models;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using UsersManager.Models;
 
@@ -15,7 +17,7 @@ namespace UsersManager.Logic
         Task<User> Fetch(string userId);
     }
 
-    public class UsersRepository : BaseRepository, IUsersRepository
+    public class UsersRepository : BaseRepository, IUsersRepository, IValueResolver<FeedResponse, EnrichedFeed, EnrichedPost[]>
     {
         public UsersRepository(IHttpClientFactory factory): base(factory)
         {
@@ -26,7 +28,7 @@ namespace UsersManager.Logic
 
         public async Task<User> Fetch(string userId)
         {
-            using (var httpClient = _httpClientFactory.CreateClient())
+            using (var httpClient = _httpClientFactory.CreateClient("withToken"))
             {
                 var authServiceUrl = Environment.GetEnvironmentVariable("MICROSERVICES_AUTH");
                 var userResponse = await
@@ -51,6 +53,15 @@ namespace UsersManager.Logic
             {
 
             }
+        }
+
+        public EnrichedPost[] Resolve(FeedResponse source, EnrichedFeed destination, EnrichedPost[] destMember, ResolutionContext context)
+        {
+            return 
+                source.Posts
+                .Select(async post => new EnrichedPost() { User=await Fetch(post.User) })
+                .Select(t => t.Result)
+                .ToArray();
         }
     }
 }

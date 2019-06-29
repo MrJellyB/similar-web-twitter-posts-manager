@@ -11,20 +11,11 @@ namespace UsersManager
 {
     public class Profiles: Profile
     {
-        private readonly IUsersRepository _usersRepository;
-
-        public Profiles(IUsersRepository usersRepository)
-        {
-            _usersRepository = usersRepository;
-        }
-
         public Profiles()
         {
             CreateMap<FeedResponse, EnrichedFeed>()
                 .ForMember(dest => dest.Posts,
-                           opt => opt.MapFrom(feed =>
-                              feed.Posts.Select(post => _usersRepository.Fetch(post.User))
-                           ));
+                           opt => opt.MapFrom<UsersRepository>());
         }
     }
 }
