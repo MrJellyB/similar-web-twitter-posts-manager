@@ -21,7 +21,7 @@ namespace UsersManager.Logic
     {
         public UsersRepository(IHttpClientFactory factory): base(factory)
         {
-
+            UsersList = new Dictionary<string, User>();
         }
 
         public Dictionary<string, User> UsersList { get; private set; }
@@ -31,6 +31,11 @@ namespace UsersManager.Logic
             if (userId == null)
                 return null;
 
+            UsersList.TryGetValue(userId, out var cachedUser);
+
+            if (cachedUser != null)
+                return cachedUser;
+
             using (var httpClient = _httpClientFactory.CreateClient("withToken"))
             {
                 var authServiceUrl = Environment.GetEnvironmentVariable("MICROSERVICES_AUTH");
@@ -38,6 +43,8 @@ namespace UsersManager.Logic
                     (await httpClient.GetAsync($"{authServiceUrl}/info/user?userId={userId}")).Content.ReadAsStringAsync();
 
                 var user = JsonConvert.DeserializeObject<User>(userResponse);
+
+                UsersList.Add(userId, user);
 
                 return user;
             }
