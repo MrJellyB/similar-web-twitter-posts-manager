@@ -23,7 +23,14 @@ namespace PostManager.Controllers
         [HttpPut]
         public async Task<IActionResult> Put([FromBody]SendPostRequest postToSend)
         {
-            await _postsService.Send(postToSend);
+            return Ok(await _postsService.Send(postToSend));
+        }
+
+        [HttpPost]
+        [Route("like")]
+        public async Task<IActionResult> Like(string postId)
+        {
+            await _postsService.Like(postId);
 
             return Ok();
         }

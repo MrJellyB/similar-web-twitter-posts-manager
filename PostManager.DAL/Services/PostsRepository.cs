@@ -9,9 +9,11 @@ namespace PostManager.DAL.Services
 
     public interface IPostsRepository
     {
-        void CreatePost(Post postToSave);
+        void CreatePost(ref Post postToSave);
 
         Task<bool> SaveChangesAsync();
+
+        Task IncreaseLikes(string postId);
     }
 
     public class PostsRepository : BaseFeedRepository, IPostsRepository
@@ -20,7 +22,13 @@ namespace PostManager.DAL.Services
         {
         }
 
-        public void CreatePost(Post postToSave)
+        public async Task IncreaseLikes(string postId)
+        {
+            var post = await _context.FindAsync<Post>(postId);
+            post.LikesCount++;
+        }
+
+        public void CreatePost(ref Post postToSave)
         {
             if (postToSave == null)
             {

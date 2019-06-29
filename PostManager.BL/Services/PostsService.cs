@@ -10,7 +10,8 @@ namespace PostManager.BL.Services
 {
     public interface IPostsService
     {
-        Task Send(SendPostRequest request);
+        Task<int> Send(SendPostRequest request);
+        Task Like(string id);
     }
 
     public class PostsService : IPostsService
@@ -26,7 +27,7 @@ namespace PostManager.BL.Services
             _feedsRepository = feedsRepository;
         }
 
-        public async Task Send(SendPostRequest request)
+        public async Task<int> Send(SendPostRequest request)
         {
             Post postEntity = _mapper.Map<Post>(request);
 
@@ -34,8 +35,15 @@ namespace PostManager.BL.Services
                 await _feedsRepository.GetOneAsync((feed) => feed.RelatedToUser == request.OwnerId);
             _feedsRepository.AddToFeed(ref postEntity ,ref postOwnerFeed);
 
-            _postsRepository.CreatePost(postEntity);
+            _postsRepository.CreatePost(ref postEntity);
             await _postsRepository.SaveChangesAsync();
+
+            return postEntity.PostId;
+        }
+
+        public async Task Like(string id)
+        {
+            await _postsRepository.IncreaseLikes(id);
         }
     }
 }

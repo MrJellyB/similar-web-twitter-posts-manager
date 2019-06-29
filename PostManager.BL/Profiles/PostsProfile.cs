@@ -11,7 +11,9 @@ namespace PostManager.BL.Profiles
             CreateMap<SendPostRequest, Post>();
             CreateMap<Post, PostResponse>()
                 .ForMember(dest => dest.User,
-                           opt => opt.MapFrom(post => post.OwnerId));
+                           opt => opt.MapFrom(post => post.OwnerId))
+                .ForMember(dest => dest.Id,
+                           opt => opt.MapFrom(post => post.PostId));
         }
     }
 }
