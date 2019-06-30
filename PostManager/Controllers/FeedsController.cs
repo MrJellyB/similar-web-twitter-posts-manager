@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PostManager.BL.Services;
 using PostManager.Common.Exceptions;
 using PostManager.Common.Models;
-using PostManager.Middlewares;
+using PostManager.Common.Middlewares;
 using Microsoft.AspNetCore.Authorization;
 
 namespace PostManager.Controllers
