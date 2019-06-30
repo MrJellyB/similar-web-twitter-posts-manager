@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PostManager.DAL.Contexts;
 using PostManager.DAL.Services;
+using System;
 
 namespace PostManager.BL.Startup
 {
@@ -13,9 +14,8 @@ namespace PostManager.BL.Startup
         {
             var connectionString = configuration.GetConnectionString("DefaultConnection");
 
-            //services.AddTransient<IDbContextOptions, DbContextOptions>();
-            //services.AddSingleton<IPostsRepositoryFactory, PostsRepositoryFactory>();
-            //services.AddSingleton<IFeedContextFactory, FeedContextFactory>();
+            if (connectionString == null)
+                connectionString = Environment.GetEnvironmentVariable("DATABASE_CONNECTION_STRING");
 
             services.AddDbContext<FeedContext>(options => options.UseNpgsql(connectionString));
 

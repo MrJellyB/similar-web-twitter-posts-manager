@@ -7,9 +7,8 @@ using PostManager.DAL.Contexts;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using System;
-using PostManager.BL.Services;
 using PostManager.BL.Startup;
-using PostManager.Middlewares;
+using PostManager.Common.Middlewares;
 
 namespace PostManager
 {
